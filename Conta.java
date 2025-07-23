@@ -34,4 +34,14 @@ public class Conta {
         }
         return false;
     }
+
+    public static Conta getConta(String nome) {
+        // Para fins de teste, retorna uma conta fictícia
+        return new Conta(nome, "Conta Corrente");
+    }
+
+    public void transferir(double valor, String tipo) {
+        // Apenas simula a transferência
+        System.out.println("Transferência de R$ " + valor + " realizada como " + tipo + ".");
+    }
 }

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         
         System.out.println("Bem vindo ao PayBank");
         System.out.println("Já possui conta?");
@@ -12,6 +12,33 @@ public class Main {
         int opcao = sc.nextInt();
         if(opcao == 1){
             System.out.println("Qual operacao deseja realizar?");
+            System.out.println("1. Trasferencia");
+            System.out.println("2. Sacar");
+            System.out.println("3. Conferir Saldo");
+            System.out.println("4. Depositar");
+            System.out.println("5. Sair");
+            int opcao3 = sc.nextInt();
+            switch (opcao3){
+                case 1: {
+                    System.out.println("Digite o nome da conta");
+                    String nome = sc.next();
+                    System.out.println("Digite o valor da transação");
+                    double valor = sc.nextDouble();
+                    Conta conta = Conta.getConta(nome);
+                    if (valor < 0 || valor > conta.getSaldo()) {
+                        System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
+                        System.out.println("Valor inválido!");
+                    } else {
+                        System.out.println("Valor inserido: " + valor);
+                        System.out.println("Saldo da conta: " + conta.getSaldo());
+                        conta.depositar(valor);
+                        System.out.println("Saldo da conta: " + conta.getSaldo());
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
             
             }
         else{ if (opcao ==2){
