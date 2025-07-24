@@ -25,7 +25,7 @@ public class Main {
                     System.out.println("Digite o valor da transação");
                     double valor = sc.nextDouble();
                     Conta conta = Conta.getConta(nome);
-                    if (valor < 0 || valor > conta.getSaldo()) {
+                    if (valor == 0 || valor > conta.getSaldo()) {
                         System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
                         System.out.println("Valor inválido!");
                     } else {
@@ -36,10 +36,59 @@ public class Main {
                     }
                     break;
                 }
+                case 2: {
+                    System.out.println("Digite o nome da conta");
+                    String nome = sc.next();
+                    Conta conta = Conta.getConta(nome);
+                    if (conta.getSaldo() == 0) {
+                        System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
+                        System.out.println("Saldo da conta: R$ 0");
+                    } else {
+                        System.out.println("Digite o valor que deseja sacar");
+                        double valor = sc.nextDouble();
+                        if (valor == 0 || valor > conta.getSaldo()) {
+                            System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
+                            System.out.println("Valor inválido!");
+                        } else {
+                            System.out.println("Valor retirado: " + valor);
+                            System.out.println("Saldo da conta: " + (conta.getSaldo() - valor));
+                            conta.sacar(valor);
+                        }
+                    }
+                    break;
+                }
+                case 3: {
+                    System.out.println("Digite o nome da conta");
+                    String nome = sc.next();
+                    Conta conta = Conta.getConta(nome);
+                    System.out.println("Saldo da conta: " + conta.getSaldo());
+                    break;
+                }
+                case 4: {
+                    System.out.println("Digite o nome da conta");
+                    String nome = sc.next();
+                    System.out.println("Digite o valor que deseja depositar");
+                    double valor = sc.nextDouble();
+                    System.out.println("Saldo anterior: " + Conta.getConta(nome).getSaldo());1
+                    Conta conta = Conta.getConta(nome);
+                    conta.depositar(valor);
+                    System.out.println("Saldo atual: " + conta.getSaldo());
+                    break;
+                }
+                case 5: {
+                    System.out.println("Deseja sair do programa?");
+                    System.out.println("1. Sim");
+                    System.out.println("2. Não");
+                    int opcao2 = sc.nextInt();
+                    if (opcao2 == 1) {
+                        System.out.println("Saindo do programa...");
+                        System.exit(0);
+                    }
+                    break;
+                }
                 default:
                     break;
             }
-            
             }
         else{ if (opcao ==2){
             System.out.println("Deseja criar uma conta?");
