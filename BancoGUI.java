@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class BancoGUI extends JFrame {
     private Conta conta;
@@ -79,12 +78,20 @@ public class BancoGUI extends JFrame {
         }
 
         if (resposta == JOptionPane.YES_OPTION) {
-            // Simula buscar conta existente
             conta = Conta.getConta(nome);
+            if (conta == null) {
+                JOptionPane.showMessageDialog(this, "Conta não encontrada!");
+                return;
+            }
             saldoLabel.setText("Saldo: R$ " + String.format("%.2f", conta.getSaldo()));
-            JOptionPane.showMessageDialog(this, "Conta carregada! (Simulação)");
+            JOptionPane.showMessageDialog(this, "Conta carregada!");
         } else {
-            conta = new Conta(nome, tipo);
+            Conta novaConta = Conta.criarConta(nome, tipo);
+            if (novaConta == null) {
+                JOptionPane.showMessageDialog(this, "Já existe uma conta com esse nome!");
+                return;
+            }
+            conta = novaConta;
             saldoLabel.setText("Saldo: R$ " + String.format("%.2f", conta.getSaldo()));
             JOptionPane.showMessageDialog(this, "Conta criada com sucesso!");
         }

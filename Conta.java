@@ -1,7 +1,11 @@
+import java.util.HashMap;
+
 public class Conta {
     private String nome;
     private String tipo;
     private double saldo;
+
+    private static HashMap<String, Conta> contas = new HashMap<>();
 
     public Conta(String nome, String tipo) {
         this.nome = nome;
@@ -36,8 +40,16 @@ public class Conta {
     }
 
     public static Conta getConta(String nome) {
-        // Para fins de teste, retorna uma conta fictícia
-        return new Conta(nome, "Conta Corrente");
+        return contas.get(nome);
+    }
+
+    public static Conta criarConta(String nome, String tipo) {
+        if (!contas.containsKey(nome)) {
+            Conta nova = new Conta(nome, tipo);
+            contas.put(nome, nova);
+            return nova;
+        }
+        return null; // Conta já existe
     }
 
     public void transferir(double valor, String tipo) {

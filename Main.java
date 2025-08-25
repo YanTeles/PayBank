@@ -22,9 +22,13 @@ public class Main {
                 case 1: {
                     System.out.println("Digite o nome da conta");
                     String nome = sc.next();
+                    Conta conta = Conta.getConta(nome);
+                    if (conta == null) {
+                        System.out.println("Conta não encontrada!");
+                        break;
+                    }
                     System.out.println("Digite o valor da transação");
                     double valor = sc.nextDouble();
-                    Conta conta = Conta.getConta(nome);
                     if (valor == 0 || valor > conta.getSaldo()) {
                         System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
                         System.out.println("Valor inválido!");
@@ -40,6 +44,10 @@ public class Main {
                     System.out.println("Digite o nome da conta");
                     String nome = sc.next();
                     Conta conta = Conta.getConta(nome);
+                    if (conta == null) {
+                        System.out.println("Conta não encontrada!");
+                        break;
+                    }
                     if (conta.getSaldo() == 0) {
                         System.out.println("ERRO! ERRO! ERRO! ERRO! ERRO! ERRO!");
                         System.out.println("Saldo da conta: R$ 0");
@@ -61,16 +69,24 @@ public class Main {
                     System.out.println("Digite o nome da conta");
                     String nome = sc.next();
                     Conta conta = Conta.getConta(nome);
+                    if (conta == null) {
+                        System.out.println("Conta não encontrada!");
+                        break;
+                    }
                     System.out.println("Saldo da conta: " + conta.getSaldo());
                     break;
                 }
                 case 4: {
                     System.out.println("Digite o nome da conta");
                     String nome = sc.next();
+                    Conta conta = Conta.getConta(nome);
+                    if (conta == null) {
+                        System.out.println("Conta não encontrada!");
+                        break;
+                    }
                     System.out.println("Digite o valor que deseja depositar");
                     double valor = sc.nextDouble();
-                    System.out.println("Saldo anterior: " + Conta.getConta(nome).getSaldo());1
-                    Conta conta = Conta.getConta(nome);
+                    System.out.println("Saldo anterior: " + conta.getSaldo());
                     conta.depositar(valor);
                     System.out.println("Saldo atual: " + conta.getSaldo());
                     break;
@@ -103,13 +119,16 @@ public class Main {
                 System.out.println("2. Conta poupança");
                 int tipoOpcao = sc.nextInt();
                 String tipo = (tipoOpcao == 1) ? "Conta Corrente" : "Conta Poupança";
-                Conta novaConta = new Conta(nome, tipo);
-                System.out.println("Conta criada com sucesso!");
-                System.out.println("Nome: " + novaConta.getNome());
-                System.out.println("Tipo: " + novaConta.getTipo());
-                System.out.println("Saldo: R$ " + novaConta.getSaldo());
+                Conta novaConta = Conta.criarConta(nome, tipo);
+                if (novaConta == null) {
+                    System.out.println("Já existe uma conta com esse nome!");
+                } else {
+                    System.out.println("Conta criada com sucesso!");
+                    System.out.println("Nome: " + novaConta.getNome());
+                    System.out.println("Tipo: " + novaConta.getTipo());
+                    System.out.println("Saldo: R$ " + novaConta.getSaldo());
+                }
             }
-            
         }
         
 
